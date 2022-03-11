@@ -1,0 +1,5 @@
+# To install "pip3 install -r requirements.txt"
+apispec_webframeworks
+apispec
+extensions
+flask
