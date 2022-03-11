@@ -62,8 +62,8 @@ class MecLocationInfo(Schema):
     confidence        = fields.Float(description="Percentage by which the position of a target entity is known (only shapes 1,4 or 6)")
     includedAngle     = fields.Float(description="for shape = 6")
     innerRadius       = fields.Float(description="for shape = 6")
-    latitude          = fields.Integer(description="-90 to 90 degrees. Only > 1 if shape = 7", required=True)
-    longitude         = fields.Integer(description="longitued -180 to 180. Only > 1 if shape = 7", required=True)
+    latitude          = fields.Float(description="-90 to 90 degrees. Only > 1 if shape = 7", required=True)
+    longitude         = fields.Float(description="longitued -180 to 180. Only > 1 if shape = 7", required=True)
     shapeDescription="""
     1 = ELLIPSOID_ARC
     2 = ELLIPSOID_POINT

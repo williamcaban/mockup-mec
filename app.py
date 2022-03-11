@@ -4,7 +4,7 @@ from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from apispec_webframeworks.flask import FlaskPlugin
 from marshmallow import Schema, fields
-from flask import Flask, jsonify, make_response, redirect, url_for, render_template, send_from_directory
+from flask import Flask, jsonify, make_response, redirect, url_for, render_template, send_from_directory, request
 import time
 
 # Import MEC Models definitions
@@ -67,13 +67,6 @@ def queriesDistance():
             application/json:
               schema: MecLocationTerminalDistance
     """
-    # dummy_data = {
-    #     "requester" : "dummg",
-    #     "address" : "url://localhost",
-    #     "latitude" : 1.234,
-    #     "longitude" : 1.234,
-    #     "status" : 200
-    # }
     dummy_data = {
         "accuracy": 1,
         "distance": 3,
@@ -102,19 +95,19 @@ def queriesUsers():
               schema: MecLocationUserList     
     """
     dummy_data = {
-        "resourceURL":"uri://localhost/queries/users?...",
+        "resourceURL": request.url,
         "user":[{
             "accessPointId":"ap1234",
-            "address":"mec://localhost/mec/ue/1234",
-            "resourceURL": "mec://localhost/mec/ue/1234",
+            "address": request.url_root + "mec/ue/456",
+            "resourceURL": request.url_root + "mec/ue/456",
             "timestamp": getMecTimeStamp(),
             "zoneId":"zone240",
             "contextLocationInfo": "mobile device",
             "locationInfo": {
                 "accuracy":1,
                 "shape":1,
-                "latitude": 1.234,
-                "longitude": 2.3134,
+                "latitude": -5.123,
+                "longitude": -9.234,
                 "timestamp": getMecTimeStamp(),
             }
 
@@ -140,13 +133,13 @@ def queriesZones():
               schema: MecLocationZoneList
     """
     dummy_data={
-        "resourceURL":"uri://localhost/...",
+        "resourceURL": request.url,
         "zone":[
             {
                 "numberOfAccessPoints": 5,
                 "numberOfUnserviceableAccessPoints": 1,
                 "numberOfUsers": 779,
-                "resourceURL":"uri://localhost/mec/zone/35",
+                "resourceURL": request.url_root+"mec/zone/35",
                 "zoneId":"zone35"
             }
         ]
