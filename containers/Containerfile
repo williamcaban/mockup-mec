@@ -1,5 +1,5 @@
 #FROM registry.access.redhat.com/ubi8/ubi
-FROM pull quay.io/centos/centos:stream9
+FROM quay.io/centos/centos:stream9
 
 
 RUN dnf install --setopt=tsflags=nodocs -y epel-release
