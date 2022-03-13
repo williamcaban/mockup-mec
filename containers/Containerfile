@@ -10,9 +10,9 @@ RUN dnf install --setopt=tsflags=nodocs -y \
     && dnf clean all    \
     && rm -fr /var/cache/dnf
 
-RUN pip3 install -r requirements.txt
-
 COPY . /app
+
+RUN pip3 install -r /app/requirements.txt
 
 LABEL io.k8s.display-name="Mockup MEC" \
     io.k8s.description="Mockup to for MEC API simulations" \
