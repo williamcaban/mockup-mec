@@ -5,5 +5,7 @@ extensions
 flask
 marshmallow
 shapely
-numpy
+# Must be 1.22.0 or higer because of CVE 
+# https://github.com/numpy/numpy/issues/18939
+numpy>=1.22.0
 haversine

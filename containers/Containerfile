@@ -1,19 +1,27 @@
 #FROM registry.access.redhat.com/ubi8/ubi
 FROM quay.io/centos/centos:stream9
 
-RUN dnf install --setopt=tsflags=nodocs -y epel-release
-
-RUN dnf install --setopt=tsflags=nodocs -y \
-    geos geos-devel     \
-    python3 python3-pip python3-pip-wheel python3-setuptools-wheel python3-numpy \
-    && dnf clean all    \
+# Make sure image is updated and EPEL is installed
+RUN dnf -y update \
+    && dnf install --setopt=tsflags=nodocs -y epel-release \
+    && dnf install --setopt=tsflags=nodocs -y \
+    geos geos-devel \
+    python3 python3-pip \
+    && dnf clean all \
     && rm -fr /var/cache/dnf
 
 WORKDIR /app
+# user for running app
+RUN useradd -d /app -r -g root -s /sbin/nologin -c "Container image user" appuser \
+    && chmod 0775 /app
 COPY ./ /app
-RUN pip3 --no-cache-dir install -r requirements.txt
 
-RUN useradd -d /app -r -g root -s /sbin/nologin -c "Container image user" appuser && chmod 0775 /app
+# upgrade pip3 and install required packages (at Pod level)
+RUN pip3 install wheel \
+    && pip3 install --upgrade pip \
+    && pip3 install -r requirements.txt \
+    && pip3 cache purge
+
 USER appuser
 EXPOSE 5000/tcp
 
