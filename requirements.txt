@@ -3,3 +3,5 @@ apispec_webframeworks
 apispec
 extensions
 flask
+shapely
+numpy

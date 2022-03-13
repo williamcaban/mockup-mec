@@ -1,0 +1,20 @@
+#FROM registry.access.redhat.com/ubi8/ubi
+FROM pull quay.io/centos/centos:stream9
+
+
+RUN dnf install --setopt=tsflags=nodocs -y epel-release
+
+RUN dnf install --setopt=tsflags=nodocs -y \
+    geos geos-devel     \
+    python3 python3-pip python3-numpy \
+    && dnf clean all    \
+    && rm -fr /var/cache/dnf
+
+RUN pip3 install -r requirements.txt
+
+
+LABEL io.k8s.display-name="Mockup MEC" \
+    io.k8s.description="Mockup to for MEC API simulations" \
+    io.openshift.tags="mec,5g,mmwave,4g,lte"
+
+ENTRYPOINT /bin/bash -c "sleep infinity"
