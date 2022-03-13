@@ -1,18 +1,21 @@
 #FROM registry.access.redhat.com/ubi8/ubi
 FROM quay.io/centos/centos:stream9
 
-
 RUN dnf install --setopt=tsflags=nodocs -y epel-release
 
 RUN dnf install --setopt=tsflags=nodocs -y \
     geos geos-devel     \
-    python3 python3-pip python3-numpy \
+    python3 python3-pip python3-pip-wheel python3-setuptools-wheel python3-numpy \
     && dnf clean all    \
     && rm -fr /var/cache/dnf
 
-COPY . /app
+WORKDIR /app
+COPY ./ /app
+RUN pip3 --no-cache-dir install -r requirements.txt
 
-RUN pip3 install -r /app/requirements.txt
+RUN useradd -d /app -r -g root -s /sbin/nologin -c "Container image user" appuser && chmod 0775 /app
+USER appuser
+EXPOSE 5000/tcp
 
 LABEL io.k8s.display-name="Mockup MEC" \
     io.k8s.description="Mockup to for MEC API simulations" \

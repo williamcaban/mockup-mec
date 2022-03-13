@@ -3,5 +3,7 @@ apispec_webframeworks
 apispec
 extensions
 flask
+marshmallow
 shapely
 numpy
+haversine
