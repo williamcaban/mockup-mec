@@ -1,8 +1,8 @@
 # Script to build container
 
 export BASEREG=quay.io/wcaban
-export DTAG=$(date +%y%m%d)
-#export BUILD_AND_UPLOAD=True
+export DTAG=$(date +%y%m%d%H%M)
+export BUILD_AND_UPLOAD=True
 
 podman build -t ${BASEREG}/mockup-mec -f containers/Containerfile .
 

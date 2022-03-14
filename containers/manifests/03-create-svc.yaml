@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mec-api-svc
+  namespace: mockup-mec
+  labels:
+    app: mockup-mec
+spec:
+  selector:
+    app: mockup-mec
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000

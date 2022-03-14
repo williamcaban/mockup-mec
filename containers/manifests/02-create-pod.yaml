@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mec-api
+  namespace: mockup-mec
+  labels:
+    app: mockup-mec
+spec:
+    containers:
+      - name: mec-api
+        image: quay.io/wcaban/mockup-mec:latest
+        command:
+          - python3
+          - app.py
+        ports:
+          - name: main-app
+            containerPort: 5000
+            protocol: TCP
+
+    # imagePullSecrets:
+    #   - name: {PULL-SECRET-NAME}

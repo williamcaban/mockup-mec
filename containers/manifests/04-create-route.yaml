@@ -1,0 +1,19 @@
+---
+# OpenShift route
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: mec-api-route
+  namespace: mockup-mec
+  labels:
+    app: mockup-mec
+spec:
+  # update host to match your environment
+  host: mec-api-route-mockup-mec.apps.mgmt.telco.shift.zone
+  to:
+    kind: Service
+    name: mec-api-svc
+    weight: 100
+  port:
+    targetPort: 5000
+  wildcardPolicy: None
