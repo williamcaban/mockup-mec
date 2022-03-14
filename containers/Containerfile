@@ -16,7 +16,7 @@ RUN useradd -d /app -r -g root -s /sbin/nologin -c "Container image user" appuse
     && chmod 0775 /app
 COPY ./models/*.py /app/models/
 COPY ./simulator/*.py /app/simulator
-COPY ./resources ./app.py ./requirements.txt /app
+COPY ./resources ./app.py ./requirements.txt /app/
 
 # upgrade pip3 and install required packages (at Pod level)
 RUN pip3 install wheel \
