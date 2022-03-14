@@ -9,3 +9,4 @@ shapely
 # https://github.com/numpy/numpy/issues/18939
 numpy>=1.22.0
 haversine
+SQLAlchemy>-1.4.32

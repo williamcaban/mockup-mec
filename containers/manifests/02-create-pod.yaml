@@ -10,6 +10,7 @@ spec:
     containers:
       - name: mec-api
         image: quay.io/wcaban/mockup-mec:latest
+        imagePullPolicy: Always
         command:
           - python3
           - app.py
